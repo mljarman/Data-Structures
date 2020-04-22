@@ -12,9 +12,9 @@ class LRUCache:
     """
     def __init__(self, limit=10):
         self.limit = limit
-        self.dll = DoublyLinkedList()
-        self.dict = dict()
-        self.size = 0
+        self.dll = DoublyLinkedList() # self.ordering = DoublyLinkedList()
+        self.dict = dict() # self.storage = {}
+        self.size = 0 # len(self.ordering)
 
 
 
@@ -26,6 +26,7 @@ class LRUCache:
     key-value pair doesn't exist in the cache.
     """
     def get(self, key):
+        # if key is in our cache:
         if key in self.dict:
             node = self.dict[key]
             self.dll.move_to_front(node)
@@ -46,18 +47,17 @@ class LRUCache:
     def set(self, key, value):
         # if key already exists, overwrite value and move to front
         if key in self.dict:
-            self.dict[key].value = (key, value)
+            self.dict[key].value = (key, value) # node.value = (key, value)
             node = self.dict[key]
             self.dll.move_to_front(node)
-        # if at max capacity, delete tail
-        elif self.dll.length == self.limit:
+            return # nothing after this gets executed if relevant
+        # if at max capacity, delete tail & add new
+        elif self.dll.length == self.limit: # self.size == self.limit
             lru_key = self.dll.tail.value[0]
             del self.dict[lru_key]
             self.dll.remove_from_tail()
-            self.dll.add_to_head((key, value))
-            self.dict[key] = self.dll.head
-        # if new, add to head
-        else:
-            self.dll.add_to_head((key, value))
-            self.dict[key] = self.dll.head
-            self.size += 1
+            self.size -= 1
+        #  if new and not at max capacity, add to head (will skip deleting tail)
+        self.dll.add_to_head((key, value))
+        self.dict[key] = self.dll.head
+        self.size += 1
