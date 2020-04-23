@@ -10,12 +10,11 @@ Answer the following questions for each of the data structures you implemented a
 
 ## Binary Search Tree
 
-1. What is the runtime complexity of `insert`?
+1. What is the runtime complexity of `insert`? O(log n) because we eliminate 1 side of the tree depending if its larger or smaller.
 
-2. What is the runtime complexity of `contains`?
+2. What is the runtime complexity of `contains`? O(log n) because we eliminate 1 side of the tree depending if its larger or smaller.
 
-3. What is the runtime complexity of `get_max`?
-
+3. What is the runtime complexity of `get_max`? O(log n) because we eliminate 1 side of the tree depending if its larger or smaller.
 ## Heap
 
 1. What is the runtime complexity of `_bubble_up`?
