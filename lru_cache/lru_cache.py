@@ -14,7 +14,7 @@ class LRUCache:
         self.limit = limit
         self.dll = DoublyLinkedList() # self.ordering = DoublyLinkedList()
         self.dict = dict() # self.storage = {}
-        self.size = 0 # len(self.ordering)
+        self.size = 0
 
 
 

@@ -18,8 +18,8 @@ class BinarySearchTree:
             # check if self.left is a valid node
             if self.left:
                 self.left.insert(value)
-                # the left side is empty
             else:
+                # the left side is empty
                 # we've found parking spot
                 self.left = BinarySearchTree(value)
         # otherwise, value >= self.value
@@ -27,6 +27,8 @@ class BinarySearchTree:
             if self.right:
                 self.right.insert(value)
             else:
+                # the right side is empty
+                # we've found parking spot
                 self.right = BinarySearchTree(value)
 
     # Return True if the tree contains the value
@@ -35,27 +37,32 @@ class BinarySearchTree:
         # base case: if value is target, return True
         if self.value == target:
             return True
+        # if target is less than node, go left
         if target < self.value:
             if self.left:
                 return self.left.contains(target)
             else:
+                # if get to the end, does not contain target
                 return False
-        # if bigger, but we can't go right, return False
         else:
+            # if target is larger than node, go right
             if self.right:
                 return self.right.contains(target)
             else:
+                # if get to the end on right, does not contain target
                 return False
 
     # Return the maximum value found in the tree
     def get_max(self):
         # will be furthest node to right.
-        # base case: no more nodes to right.
-        if self.right == None:
-            return None
-        else:
-            self.right.get_max()
+        # base case: no nodes to right.
+        if self.right is None:
             return self.value
+        else:
+            # if can go right, go furthest to right.
+            if self.right:
+                return self.right.get_max()
+
 
 
     # Call the function `cb` on the value of each node
